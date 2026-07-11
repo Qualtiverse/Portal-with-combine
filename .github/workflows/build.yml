@@ -27,19 +27,16 @@ jobs:
 
     - name: Build server DLL
       shell: pwsh
-      continue-on-error: true
       run: |
-        & "$env:MSBUILD_EXE" game\server\server_hl2.vcxproj /p:Configuration=Release /p:Platform=Win32 /p:PlatformToolset=v143 /m /v:detailed /fl /flp:logfile=build.log;verbosity=detailed
+        & "$env:MSBUILD_EXE" game\server\server_hl2.vcxproj /p:Configuration=Release /p:Platform=Win32 /p:PlatformToolset=v143 /m /v:detailed 2>&1 | Tee-Object -FilePath build.log
 
-    - name: Upload build log
-      if: always()
-      uses: actions/upload-artifact@v4
-      with:
-        name: build-log
-        path: build.log
+    - name: Show build log tail on failure
+      if: failure()
+      shell: pwsh
+      run: |
+        Get-Content build.log -Tail 50
 
     - name: Upload server.dll (if built)
-      if: always()
       uses: actions/upload-artifact@v4
       with:
         name: server-dll
