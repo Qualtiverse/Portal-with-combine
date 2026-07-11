@@ -12,3 +12,9 @@
     output OnUnPressed(void) : "Called when the button has been unpressed."
     output OnButtonReset(void) : "Called when the button resets after the delay."
 ]
+
+@PointClass base(Targetname, Parentname) = weapon_physcannon
+[
+    input Upgrade(void) : "Upgrade the physcannon to overcharged mode (alias for BecomeMegaCannon)."
+    input BecomeMegaCannon(void) : "Upgrade the physcannon to overcharged mode."
+]

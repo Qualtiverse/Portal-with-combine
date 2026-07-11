@@ -1557,6 +1557,9 @@ PRECACHE_WEAPON_REGISTER( weapon_physcannon );
 
 BEGIN_DATADESC( CWeaponPhysCannon )
 
+	DEFINE_INPUTFUNC( FIELD_VOID, "BecomeMegaCannon", InputBecomeMegaCannon ),
+	DEFINE_INPUTFUNC( FIELD_VOID, "Upgrade", InputBecomeMegaCannon ),
+
 	DEFINE_FIELD( m_bOpen, FIELD_BOOLEAN ),
 	DEFINE_FIELD( m_bActive, FIELD_BOOLEAN ),
 
@@ -4779,6 +4782,11 @@ void PhysCannonForceDrop( CBaseCombatWeapon *pActiveWeapon, CBaseEntity *pOnlyIf
 	}
 }
 
+void CWeaponPhysCannon::InputBecomeMegaCannon( inputdata_t &inputdata )
+{
+	BeginUpgrade();
+}
+
 void PhysCannonBeginUpgrade( CBaseAnimating *pAnim )
 {
 	CWeaponPhysCannon *pWeaponPhyscannon = assert_cast<	CWeaponPhysCannon* >( pAnim );
@@ -4947,3 +4955,36 @@ void GrabController_SetPortalPenetratingEntity( CGrabController *pController, CB
 {
 	pController->SetPortalPenetratingEntity( pPenetrated );
 }
+
+void CC_UpgradePhysCannon( const CCommand &args )
+{
+	CBasePlayer *pPlayer = UTIL_GetCommandClient();
+	if ( !pPlayer )
+		return;
+
+	CWeaponPhysCannon *pWeapon = dynamic_cast<CWeaponPhysCannon *>( pPlayer->GetActiveWeapon() );
+	if ( !pWeapon )
+	{
+		// Try to find it in inventory
+		for ( int i = 0; i < pPlayer->WeaponCount(); i++ )
+		{
+			CWeaponPhysCannon *pCannon = dynamic_cast<CWeaponPhysCannon *>( pPlayer->GetWeapon( i ) );
+			if ( pCannon )
+			{
+				pWeapon = pCannon;
+				pPlayer->SelectItem( "weapon_physcannon" );
+				break;
+			}
+		}
+	}
+
+	if ( pWeapon )
+	{
+		pWeapon->BeginUpgrade();
+	}
+	else
+	{
+		Warning( "You must have a physcannon to upgrade it!\n" );
+	}
+}
+static ConCommand upgrade_physcannon( "upgrade_physcannon", CC_UpgradePhysCannon, "Upgrades the player's physcannon to supercharged mode.\n", FCVAR_CHEAT );
