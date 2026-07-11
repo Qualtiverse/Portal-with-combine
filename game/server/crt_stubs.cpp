@@ -1,5 +1,10 @@
-#include <stdio.h>
 #include <stdarg.h>
+#include <stddef.h>
+
+extern "C" int vsnprintf(char *, size_t, const char *, va_list);
+extern "C" int vswprintf(wchar_t *, size_t, const wchar_t *, va_list);
+extern "C" int vsscanf(const char *, const char *, va_list);
+extern "C" int vprintf(const char *, va_list);
 
 extern "C"
 {

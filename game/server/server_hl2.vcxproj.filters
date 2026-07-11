@@ -1856,7 +1856,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gamedll_replay.cpp">
-      <Filter>Replay</Filter>
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="crt_stubs.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\game\shared\achievement_saverestore.cpp">
       <Filter>Source Files</Filter>
