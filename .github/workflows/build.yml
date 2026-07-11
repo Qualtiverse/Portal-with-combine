@@ -12,31 +12,18 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Add MSBuild to PATH
-      shell: pwsh
-      run: |
-        $vspath = & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.Component.MSBuild -property installationPath
-        if (-not $vspath) { throw "VS not found" }
-        $msbuild = Join-Path $vspath "MSBuild\Current\Bin\MSBuild.exe"
-        if (Test-Path $msbuild) {
-          echo "MSBUILD_EXE=$msbuild" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-        } else {
-          throw "MSBuild not found at $msbuild"
-        }
-        echo "Using: $msbuild"
-
     - name: Build server DLL
       shell: pwsh
       run: |
-        & "$env:MSBUILD_EXE" game\server\server_hl2.vcxproj /p:Configuration=Release /p:Platform=Win32 /p:PlatformToolset=v143 /m /v:detailed 2>&1 | Tee-Object -FilePath build.log
+        $vspath = & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.Component.MSBuild -property installationPath
+        $msbuild = Join-Path $vspath "MSBuild\Current\Bin\MSBuild.exe"
+        & $msbuild game\server\server_hl2.vcxproj /p:Configuration=Release /p:Platform=Win32 /m /v:minimal 2>&1 | Tee-Object -FilePath build.log
+        if ($LASTEXITCODE -ne 0) {
+          Get-Content build.log -Tail 30
+          throw "MSBuild failed (exit $LASTEXITCODE)"
+        }
 
-    - name: Show build log tail on failure
-      if: failure()
-      shell: pwsh
-      run: |
-        Get-Content build.log -Tail 50
-
-    - name: Upload server.dll (if built)
+    - name: Upload server.dll
       uses: actions/upload-artifact@v4
       with:
         name: server-dll

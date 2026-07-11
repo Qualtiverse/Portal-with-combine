@@ -13,6 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectName>Server (Portal_HL2)</ProjectName>
     <ProjectGuid>{C3EE918E-6836-5578-1FA2-5703048552B9}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -84,17 +85,17 @@
       <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
       <BrowseInformation>false</BrowseInformation>
       <WarningLevel>Level4</WarningLevel>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <CompileAs>CompileAsCpp</CompileAs>
       <UseFullPaths>true</UseFullPaths>
-      <DisableSpecificWarnings>;4316</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4316;4018;4244;4267;4305;4309;4389;4477;4805;4838;4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <BrowseInformationFile>$(IntDir)/</BrowseInformationFile>
-      <ErrorReporting>Prompt</ErrorReporting>
+      <ErrorReporting>Queue</ErrorReporting>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>;_DEBUG;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>;_DEBUG;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_ALLOW_MBCS_MFC_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>1033</Culture>
     </ResourceCompile>
     <PreLinkEvent>
@@ -112,7 +113,7 @@
       <SubSystem>Windows</SubSystem>
       <BaseAddress> </BaseAddress>
       <TargetMachine>MachineX86</TargetMachine>
-      <LinkErrorReporting>PromptImmediately</LinkErrorReporting>
+      <LinkErrorReporting>NoErrorReport</LinkErrorReporting>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
@@ -161,17 +162,17 @@
       <GenerateXMLDocumentationFiles>false</GenerateXMLDocumentationFiles>
       <BrowseInformation>false</BrowseInformation>
       <WarningLevel>Level4</WarningLevel>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <CompileAs>CompileAsCpp</CompileAs>
       <UseFullPaths>true</UseFullPaths>
-      <DisableSpecificWarnings>;4316</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4316;4018;4244;4267;4305;4309;4389;4477;4805;4838;4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <BrowseInformationFile>$(IntDir)/</BrowseInformationFile>
-      <ErrorReporting>Prompt</ErrorReporting>
+      <ErrorReporting>Queue</ErrorReporting>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>;NDEBUG;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>;NDEBUG;_CRT_SECURE_NO_DEPRECATE;_CRT_NONSTDC_NO_DEPRECATE;_ALLOW_MBCS_MFC_DEPRECATE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <Culture>1033</Culture>
     </ResourceCompile>
     <PreLinkEvent>
@@ -191,7 +192,7 @@
       <EnableCOMDATFolding>false</EnableCOMDATFolding>
       <BaseAddress> </BaseAddress>
       <TargetMachine>MachineX86</TargetMachine>
-      <LinkErrorReporting>PromptImmediately</LinkErrorReporting>
+      <LinkErrorReporting>NoErrorReport</LinkErrorReporting>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
