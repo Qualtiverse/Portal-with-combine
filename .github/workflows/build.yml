@@ -1,0 +1,27 @@
+name: Build Portal-Base Server DLL
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-2022
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Visual Studio 2022
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Build server DLL
+      run: |
+        cd sp\src
+        MSBuild.exe game\server\server_hl2.vcxproj /p:Configuration=Release /p:Platform=Win32 /p:PlatformToolset=v143
+
+    - name: Upload server.dll
+      uses: actions/upload-artifact@v4
+      with:
+        name: server-dll
+        path: sp\src\game\server\Release_hl2_with_ashpd\server.dll
