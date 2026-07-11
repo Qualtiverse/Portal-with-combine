@@ -2530,9 +2530,6 @@
     <ClCompile Include="MaterialModifyControl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\public\tier0\memoverride.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="message_entity.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
