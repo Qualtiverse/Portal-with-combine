@@ -18,8 +18,12 @@ jobs:
         $vspath = & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -property installationPath
         $vcvars = Join-Path $vspath "VC\Auxiliary\Build\vcvars32.bat"
         $msbuild = Join-Path $vspath "MSBuild\Current\Bin\MSBuild.exe"
-        cmd /c "`"$vcvars`" && `"$msbuild`" game\server\server_hl2.vcxproj /p:Configuration=Release /p:Platform=Win32 /m /v:minimal 2>&1" | Tee-Object -FilePath build.log
+        cmd /c "`"$vcvars`" && `"$msbuild`" game\server\server_hl2.vcxproj /p:Configuration=Release /p:Platform=Win32 /m /v:detailed 2>&1" | Tee-Object -FilePath build.log
         if ($LASTEXITCODE -ne 0) {
+          $errors = Get-Content build.log | Where-Object { $_ -match "^.*error[^:]*:" } | Select-Object -First 10
+          foreach ($e in $errors) {
+            Write-Host "::error file=build.log::$e"
+          }
           Get-Content build.log -Tail 30
           throw "MSBuild failed (exit $LASTEXITCODE)"
         }
