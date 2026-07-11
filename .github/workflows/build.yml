@@ -15,19 +15,11 @@ jobs:
     - name: Build server DLL
       shell: pwsh
       run: |
-        $vspath = & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.Component.MSBuild -property installationPath
+        $vspath = & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -property installationPath
+        $vcvars = Join-Path $vspath "VC\Auxiliary\Build\vcvars32.bat"
         $msbuild = Join-Path $vspath "MSBuild\Current\Bin\MSBuild.exe"
-        & $msbuild game\server\server_hl2.vcxproj /p:Configuration=Release /p:Platform=Win32 /m /v:detailed 2>&1 | Tee-Object -FilePath build.log
+        cmd /c "`"$vcvars`" && `"$msbuild`" game\server\server_hl2.vcxproj /p:Configuration=Release /p:Platform=Win32 /m /v:minimal 2>&1" | Tee-Object -FilePath build.log
         if ($LASTEXITCODE -ne 0) {
-          $errors = Get-Content build.log | Where-Object { $_ -match "error|fatal|Error|FATAL" } | Select-Object -First 20
-          foreach ($e in $errors) { Write-Host "::error::$e" }
+          Get-Content build.log -Tail 30
           throw "MSBuild failed (exit $LASTEXITCODE)"
         }
-
-    - name: Show build log tail
-      if: failure()
-      shell: pwsh
-      run: |
-        $lines = Get-Content build.log
-        Write-Host "=== Build log lines: $($lines.Count) ==="
-        $lines | Select-Object -Last 60
