@@ -2713,9 +2713,6 @@
     <ClCompile Include="RagdollBoogie.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\common\randoverride.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="recipientfilter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
