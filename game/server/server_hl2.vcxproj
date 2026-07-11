@@ -1433,6 +1433,7 @@
     <ClCompile Include="portal\prop_telescopic_arm.cpp" />
     <ClCompile Include="..\..\game\shared\portal\StaticCollisionPolyhedronCache.cpp" />
     <ClCompile Include="portal\trigger_portal_cleanser.cpp" />
+    <ClCompile Include="portal\trigger_physcannon_upgrade.cpp" />
     <ClCompile Include="..\..\game\server\portal\weapon_physcannon.cpp" />
     <ClCompile Include="..\..\game\shared\portal\weapon_portalbase.cpp" />
     <ClCompile Include="..\..\game\shared\portal\weapon_portalbasecombatweapon.cpp" />

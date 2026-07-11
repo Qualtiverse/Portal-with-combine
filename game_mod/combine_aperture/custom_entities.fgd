@@ -13,8 +13,7 @@
     output OnButtonReset(void) : "Called when the button resets after the delay."
 ]
 
-@PointClass base(Targetname, Parentname) = weapon_physcannon
+@TriggerClass base(Targetname, Parentname) = trigger_physcannon_upgrade : "A trigger volume that upgrades the player's physcannon to overcharged mode."
 [
-    input Upgrade(void) : "Upgrade the physcannon to overcharged mode (alias for BecomeMegaCannon)."
-    input BecomeMegaCannon(void) : "Upgrade the physcannon to overcharged mode."
+    UpgradeDelay(float) : "Upgrade Delay" : 0 : "Delay before the upgrade happens after touching the trigger."
 ]
