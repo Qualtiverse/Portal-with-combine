@@ -1,3 +1,4 @@
+#include "cbase.h"
 #include <stdio.h>
 #include <stdarg.h>
 

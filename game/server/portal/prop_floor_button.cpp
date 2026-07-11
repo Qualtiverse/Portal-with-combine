@@ -136,7 +136,7 @@ void CPropFloorButton::InputLock( inputdata_t &inputdata )
 	m_bLocked = true;
 }
 
-void CPropFloorButton::InputUnLock( inputdata_t &inputdata )
+void CPropFloorButton::InputUnlock( inputdata_t &inputdata )
 {
 	m_bLocked = false;
 }
