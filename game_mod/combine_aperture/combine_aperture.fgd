@@ -1,0 +1,53 @@
+@PointClass base(Targetname,BaseEntityAPI) color(255 0 0) iconsize(32) =
+	point_combine_spawner =
+	[
+		SpawnType(choices) : "Spawn Type" : 0 =
+		[
+			0 : "Soldier (SMG)"
+			1 : "Shotgun Soldier"
+			2 : "Elite (AR2)"
+			3 : "Manhack"
+			4 : "Scanner"
+			5 : "Metropolice"
+			6 : "Strider"
+		]
+		SpawnTypeName(string) : "Spawn Type (text name)" : ""
+		MaxActiveNPCs(integer) : "Max Alive NPCs" : 6
+		SpawnInterval(float) : "Spawn Interval (seconds)" : 5.0
+		SquadSize(integer) : "Squad Size (per wave)" : 2
+		SpawnRadius(float) : "Spawn Radius" : 256
+		StartEnabled(choices) : "Start Enabled" : 1 =
+		[
+			0 : "No"
+			1 : "Yes"
+		]
+		InfinitelyRespawn(choices) : "Infinite Spawning" : 1 =
+		[
+			0 : "No"
+			1 : "Yes"
+		]
+		TotalToSpawn(integer) : "Total NPCs to Spawn" : 10
+
+		input StartSpawn(void) : "Starts spawning waves."
+		input StopSpawn(void) : "Stops spawning waves."
+		input SpawnNow(void) : "Spawns one wave immediately."
+		input SetSpawnType(integer) : "Sets spawn type (0-6)."
+		input Toggle(void) : "Toggles spawning on/off."
+
+		output OnNPCSpawned(void) : "Fired when a single NPC spawns."
+		output OnWaveComplete(void) : "Fired when a full wave spawns."
+		output OnAllSpawned(void) : "Fired when TotalToSpawn is reached."
+		output OnAllDead(void) : "Fired when all spawned NPCs are dead."
+	]
+
+@PointClass base(Targetname) color(255 200 0) iconsize(32) =
+	weapon_portalgun =
+	[
+		// Portal Gun - give to player with "give weapon_portalgun" or place in map
+	]
+
+@PointClass base(Targetname) color(255 200 0) iconsize(32) =
+	weapon_shotgun =
+	[
+		// Shotgun - give to player with "give weapon_shotgun" or place in map
+	]

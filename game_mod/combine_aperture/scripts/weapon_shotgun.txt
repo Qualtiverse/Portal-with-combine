@@ -1,0 +1,27 @@
+WeaponData
+{
+	"printname"		"#SFUI_Weapon_Shotgun"
+	"viewmodel"		"models/weapons/v_shotgun.mdl"
+	"playermodel"	"models/weapons/w_shotgun.mdl"
+	"anim_prefix"	"shotgun"
+	"bucket"		"1"
+	"bucket_position"	"1"
+
+	"clip_size"		"6"
+	"default_clip"	"6"
+	"weight"		"15"
+	"maxammo1"		"32"
+	"maxammo2"		"-1"
+
+	"rumble"		"3"
+
+	"ammo1"			"Buckshot"
+	"ammo2"			""
+
+	"builtin_right_attack"	"0"
+	"HasSilencer"	"0"
+
+	"pose_parameters_weapon"
+	{
+	}
+}

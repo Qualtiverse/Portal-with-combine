@@ -1,0 +1,49 @@
+"GameInfo"
+{
+	game 		"Combine Aperture Incursion"
+	title		"Combine Aperture Incursion"
+	icon		"resource/icon"
+	gamelogo 1
+	type		singleplayer_only
+	hasportals  1
+	supportsvr	1
+
+	FileSystem
+	{
+		SteamAppId				220
+
+		SearchPaths
+		{
+			game+mod			|gameinfo_path|custom/*
+			game+mod			hl2/custom/*
+
+			game+mod+mod_write+default_write_path		|gameinfo_path|.
+			gamebin					|gameinfo_path|bin
+
+			game_lv				hl2/hl2_lv.vpk
+			game				|all_source_engine_paths|hl2/hl2_english.vpk
+			game				|all_source_engine_paths|hl2/hl2_pak.vpk
+			game				|all_source_engine_paths|hl2/hl2_textures.vpk
+			game				|all_source_engine_paths|hl2/hl2_sound_vo_english.vpk
+			game				|all_source_engine_paths|hl2/hl2_sound_misc.vpk
+			game				|all_source_engine_paths|hl2/hl2_misc.vpk
+			platform			|all_source_engine_paths|platform/platform_misc.vpk
+
+			game+game_write		hl2
+
+			gamebin				hl2/bin
+
+			game				|all_source_engine_paths|hl2
+
+			game+mod			|all_source_engine_paths|../Portal/portal/custom/*
+			game				|all_source_engine_paths|../Portal/portal/portal_sound_vo_english.vpk
+			game				|all_source_engine_paths|../Portal/portal/portal_pak.vpk
+			game				|all_source_engine_paths|../Portal/portal
+
+			game+mod			|all_source_engine_paths|../Portal 2/portal2/custom/*
+			game				|all_source_engine_paths|../Portal 2/portal2
+
+			platform			|all_source_engine_paths|platform
+		}
+	}
+}
