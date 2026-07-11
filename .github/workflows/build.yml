@@ -17,14 +17,17 @@ jobs:
       run: |
         $vspath = & "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.Component.MSBuild -property installationPath
         $msbuild = Join-Path $vspath "MSBuild\Current\Bin\MSBuild.exe"
-        & $msbuild game\server\server_hl2.vcxproj /p:Configuration=Release /p:Platform=Win32 /m /v:minimal 2>&1 | Tee-Object -FilePath build.log
+        & $msbuild game\server\server_hl2.vcxproj /p:Configuration=Release /p:Platform=Win32 /m /v:detailed 2>&1 | Tee-Object -FilePath build.log
         if ($LASTEXITCODE -ne 0) {
-          Get-Content build.log -Tail 30
+          $errors = Get-Content build.log | Where-Object { $_ -match "error|fatal|Error|FATAL" } | Select-Object -First 20
+          foreach ($e in $errors) { Write-Host "::error::$e" }
           throw "MSBuild failed (exit $LASTEXITCODE)"
         }
 
-    - name: Upload server.dll
-      uses: actions/upload-artifact@v4
-      with:
-        name: server-dll
-        path: game\server\Release_hl2_with_ashpd\server.dll
+    - name: Show build log tail
+      if: failure()
+      shell: pwsh
+      run: |
+        $lines = Get-Content build.log
+        Write-Host "=== Build log lines: $($lines.Count) ==="
+        $lines | Select-Object -Last 60
