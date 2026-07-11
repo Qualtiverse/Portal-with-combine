@@ -52,13 +52,14 @@ void CTriggerPhyscannonUpgrade::UpgradeTouch( CBaseEntity *pOther )
 	if ( !pPlayer )
 		return;
 
-	CWeaponPhysCannon *pWeapon = dynamic_cast<CWeaponPhysCannon *>( pPlayer->GetActiveWeapon() );
-	if ( !pWeapon )
+	CBaseCombatWeapon *pWeapon = pPlayer->GetActiveWeapon();
+	if ( !pWeapon || !FClassnameIs( pWeapon, "weapon_physcannon" ) )
 	{
+		pWeapon = NULL;
 		for ( int i = 0; i < pPlayer->WeaponCount(); i++ )
 		{
-			CWeaponPhysCannon *pCannon = dynamic_cast<CWeaponPhysCannon *>( pPlayer->GetWeapon( i ) );
-			if ( pCannon )
+			CBaseCombatWeapon *pCannon = pPlayer->GetWeapon( i );
+			if ( pCannon && FClassnameIs( pCannon, "weapon_physcannon" ) )
 			{
 				pWeapon = pCannon;
 				break;
@@ -68,6 +69,6 @@ void CTriggerPhyscannonUpgrade::UpgradeTouch( CBaseEntity *pOther )
 
 	if ( pWeapon )
 	{
-		pWeapon->BeginUpgrade();
+		PhysCannonBeginUpgrade( pWeapon );
 	}
 }
