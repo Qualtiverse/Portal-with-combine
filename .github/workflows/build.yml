@@ -12,6 +12,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - uses: glslang/setup-masm@v1.4
+      with:
+        vs-architecture: 'x86'
+
     - name: Build server DLL
       shell: pwsh
       run: |
@@ -20,10 +24,16 @@ jobs:
         $msbuild = Join-Path $vspath "MSBuild\Current\Bin\MSBuild.exe"
         cmd /c "`"$vcvars`" && `"$msbuild`" game\server\server_hl2.vcxproj /p:Configuration=Release /p:Platform=Win32 /m /v:detailed 2>&1" | Tee-Object -FilePath build.log
         if ($LASTEXITCODE -ne 0) {
-          $errors = Get-Content build.log | Where-Object { $_ -match "^.*error[^:]*:" } | Select-Object -First 10
+          $errors = Get-Content build.log | Where-Object { $_ -match "error " } | Select-Object -First 10
           foreach ($e in $errors) {
-            Write-Host "::error file=build.log::$e"
+            Write-Host "::error::$e"
           }
           Get-Content build.log -Tail 30
           throw "MSBuild failed (exit $LASTEXITCODE)"
         }
+
+    - name: Upload build log
+      uses: actions/upload-artifact@v4
+      with:
+        name: build-log
+        path: build.log
