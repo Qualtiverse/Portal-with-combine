@@ -12,10 +12,6 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - uses: glslang/setup-masm@v1.4
-      with:
-        vs-architecture: 'x86'
-
     - name: Build server DLL
       shell: pwsh
       run: |
