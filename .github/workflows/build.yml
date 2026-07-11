@@ -5,6 +5,9 @@ on:
     branches: [ main, master ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: windows-2022
@@ -34,8 +37,14 @@ jobs:
         name: build-log
         path: build.log
 
-    - name: Upload server.dll
-      uses: actions/upload-artifact@v4
+    - name: Upload server.dll to release
+      uses: svenstaro/upload-release-action@v2
       with:
-        name: server-dll
-        path: game/server/Release_hl2_with_ashpd/server.dll
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: game/server/Release_hl2_with_ashpd/server.dll
+        asset_name: server.dll
+        tag: latest
+        overwrite: true
+        make_latest: true
+        release_name: "Latest Build (${{ github.sha }})"
+        body: "Automated build from commit ${{ github.sha }}."
