@@ -33,3 +33,9 @@ jobs:
       with:
         name: build-log
         path: build.log
+
+    - name: Upload server.dll
+      uses: actions/upload-artifact@v4
+      with:
+        name: server-dll
+        path: game/server/Release_hl2_with_ashpd/server.dll
