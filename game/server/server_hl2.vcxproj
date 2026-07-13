@@ -88,7 +88,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <CompileAs>CompileAsCpp</CompileAs>
       <UseFullPaths>true</UseFullPaths>
-      <DisableSpecificWarnings>;4316</DisableSpecificWarnings>
+      <DisableSpecificWarnings>;4316;5038;5045;5219;5220;5221;5240;5246;5254;5260;5262;5263;5264;5267</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <BrowseInformationFile>$(IntDir)/</BrowseInformationFile>
       <ErrorReporting>Prompt</ErrorReporting>
@@ -165,7 +165,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <CompileAs>CompileAsCpp</CompileAs>
       <UseFullPaths>true</UseFullPaths>
-      <DisableSpecificWarnings>;4316</DisableSpecificWarnings>
+      <DisableSpecificWarnings>;4316;5038;5045;5219;5220;5221;5240;5246;5254;5260;5262;5263;5264;5267</DisableSpecificWarnings>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <BrowseInformationFile>$(IntDir)/</BrowseInformationFile>
       <ErrorReporting>Prompt</ErrorReporting>
