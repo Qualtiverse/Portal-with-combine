@@ -16,7 +16,6 @@ jobs:
       uses: microsoft/setup-msbuild@v2
 
     - name: Build server DLL
-      id: build
       shell: cmd
       run: |
         MSBuild.exe game\server\server_hl2.vcxproj /p:Configuration=Release /p:Platform=Win32 /p:PlatformToolset=v143 /fl /flp:logfile=build.log /clp:Verbosity=minimal
@@ -28,21 +27,6 @@ jobs:
       with:
         name: build-log
         path: build.log
-
-    - name: Report build errors
-      if: failure()
-      shell: powershell
-      run: |
-        Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value "# Build Failed`n"
-        if (Test-Path build.log) {
-          $log = Get-Content build.log -Raw
-          Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value "## Build Log (last 50 lines)`n``````n"
-          $lines = $log -split "`n"
-          $tail = $lines[-50..-1] -join "`n"
-          Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value "$tail`n``````n"
-          $errors = $lines | Select-String -Pattern "^.*error[ :].*|^.*fatal[ :].*|^.*LNK[0-9]{4}.*|^.*C[0-9]{4}.*" | Out-String
-          Add-Content -Path $env:GITHUB_STEP_SUMMARY -Value "## Error Lines`n``````n$errors`n``````"
-        }
 
     - name: Upload server.dll (if built)
       uses: actions/upload-artifact@v4
