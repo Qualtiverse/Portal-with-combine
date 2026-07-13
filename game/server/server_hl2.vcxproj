@@ -822,7 +822,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gamedll_replay.cpp" />
-    <ClCompile Include="crt_stubs.cpp" />
+    <!--ClCompile Include="crt_stubs.cpp" /-->
     <ClCompile Include="..\..\game\shared\achievement_saverestore.cpp" />
     <ClCompile Include="..\..\game\shared\achievementmgr.cpp" />
     <ClCompile Include="..\..\game\shared\achievements_hlx.cpp" />
