@@ -100,7 +100,7 @@
     <PreLinkEvent>
     </PreLinkEvent>
     <Link>
-      <AdditionalOptions> /ignore:4221</AdditionalOptions>
+      <AdditionalOptions> /ignore:4221 /force:multiple</AdditionalOptions>
       <AdditionalDependencies>;shell32.lib;user32.lib;advapi32.lib;gdi32.lib;comdlg32.lib;ole32.lib;winmm.lib</AdditionalDependencies>
       <ShowProgress>NotSet</ShowProgress>
       <OutputFile>$(OutDir)\server.dll</OutputFile>
@@ -137,8 +137,8 @@
       <Command>echo VPC skipped for CI</Command>
     </PreBuildEvent>
     <ClCompile>
-      <AdditionalOptions>/Zm200 /d2Zi+ /Gw /Od</AdditionalOptions>
-      <Optimization>Disabled</Optimization>
+      <AdditionalOptions>/Zm200 /d2Zi+ /Gw</AdditionalOptions>
+      <Optimization>MaxSpeed</Optimization>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
@@ -177,7 +177,7 @@
     <PreLinkEvent>
     </PreLinkEvent>
     <Link>
-      <AdditionalOptions> /ignore:4221</AdditionalOptions>
+      <AdditionalOptions> /ignore:4221 /force:multiple</AdditionalOptions>
       <AdditionalDependencies>;shell32.lib;user32.lib;advapi32.lib;gdi32.lib;comdlg32.lib;ole32.lib;winmm.lib</AdditionalDependencies>
       <ShowProgress>NotSet</ShowProgress>
       <OutputFile>$(OutDir)\server.dll</OutputFile>
@@ -1099,6 +1099,10 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
     </ClCompile-->
+    <ClCompile Include="memoverride_ci.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="message_entity.cpp" />
     <ClCompile Include="modelentities.cpp" />
     <ClCompile Include="..\..\game\shared\ModelSoundsCache.cpp" />
