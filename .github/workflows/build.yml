@@ -16,19 +16,9 @@ jobs:
       uses: microsoft/setup-msbuild@v2
 
     - name: Build server DLL
-      shell: cmd
-      run: |
-        MSBuild.exe game\server\server_hl2.vcxproj /p:Configuration=Release /p:Platform=Win32 /p:PlatformToolset=v143 /fl /flp:logfile=build.log /clp:Verbosity=minimal
-        exit /b %errorlevel%
+      run: MSBuild.exe game\server\server_hl2.vcxproj /p:Configuration=Release /p:Platform=Win32 /p:PlatformToolset=v143
 
-    - name: Upload build log
-      uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: build-log
-        path: build.log
-
-    - name: Upload server.dll (if built)
+    - name: Upload server.dll
       uses: actions/upload-artifact@v4
       if: always()
       with:
